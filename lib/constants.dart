@@ -10,6 +10,11 @@ const TextStyle kNumberStyle = TextStyle(
   fontWeight: FontWeight.w900,
 );
 
+const TextStyle kCalculateButtonStyle = TextStyle(
+  fontSize: 25.0,
+  fontWeight: FontWeight.w500,
+);
+
 const kBottomContainerHeight = 80.0;
 const kBottomContainerColor = Color(0xFFEB1555);
 const kExpandedCardActiveColor = Color(0xFF1D1E33);
