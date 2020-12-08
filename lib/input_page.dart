@@ -7,6 +7,8 @@ import 'gender_card.dart';
 import 'constants.dart';
 import 'round_icon_button.dart';
 import 'result_page.dart';
+import 'buttom_button.dart';
+import 'calculator_brain.dart';
 
 enum Gender { male, female }
 
@@ -75,7 +77,7 @@ class _InputPageState extends State<InputPage> {
                   children: [
                     Text(
                       'HEIGHT',
-                      style: kLabeltextStyle,
+                      style: kLabelTextStyle,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -88,7 +90,7 @@ class _InputPageState extends State<InputPage> {
                         ),
                         Text(
                           'cm',
-                          style: kLabeltextStyle,
+                          style: kLabelTextStyle,
                         )
                       ],
                     ),
@@ -128,7 +130,7 @@ class _InputPageState extends State<InputPage> {
                         children: <Widget>[
                           Text(
                             'Weight',
-                            style: kLabeltextStyle,
+                            style: kLabelTextStyle,
                           ),
                           Text(
                             weight.toString(),
@@ -166,8 +168,8 @@ class _InputPageState extends State<InputPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Text(
-                            'Weight',
-                            style: kLabeltextStyle,
+                            'Age',
+                            style: kLabelTextStyle,
                           ),
                           Text(
                             age.toString(),
@@ -201,25 +203,21 @@ class _InputPageState extends State<InputPage> {
                 ],
               ),
             ),
-            GestureDetector(
+            BottomButton(
+              buttonTitle: 'CALCULATE',
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ResultPage()));
+                CalculatorBrain calc = CalculatorBrain(weight: weight, height: height);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ResultPage(
+                      bmiResult: calc.calculateBMI(),
+                      resultText: calc.getResult(),
+                      interpretation: calc.getInterpretation(),
+                    )));
               },
-              child: Container(
-                child: Center(
-                  child: Text(
-                    'CALCULATE',
-                    style: kCalculateButtonStyle,
-                  ),
-                ),
-                color: kBottomContainerColor,
-                height: kBottomContainerHeight,
-                width: double.infinity,
-                margin: EdgeInsets.only(top: 10.0),
-              ),
-            ),
+            )
           ],
         ));
   }
 }
+
